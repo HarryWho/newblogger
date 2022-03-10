@@ -13,6 +13,43 @@ router.get('/', (req, res) => {
   });
 })
 
+// @desc get all public stories of selected user
+// GET /stories/user/:userId
+router.get('/user/:userId', async(req, res) => {
+  try {
+    const stories = await Story.find({ user: req.params.userId, status: 'public' })
+      .populate('user')
+
+    res.render('stories/public', {
+      caption: ` By ${stories[0].user.displayName}`,
+      user: req.user,
+      stories: stories,
+      title: `Published Stories`
+    });
+  } catch (err) {
+    console.log(err)
+    res.redirect('/')
+  }
+})
+
+// @desc get all stories with status public
+// GET /stories/public
+router.get('/public', async(req, res) => {
+  try {
+    const stories = await Story.find({ status: 'public' })
+      .populate('user')
+    res.render('stories/public', {
+      user: req.user,
+      stories: stories,
+      title: 'Published Stories',
+      caption: ''
+    });
+  } catch (err) {
+    console.log(err)
+    res.redirect('/')
+  }
+})
+
 // @desc get story data and send it to the edit form
 // GET /stories/edit/:storyId
 router.get('/edit/:storyId', async(req, res) => {

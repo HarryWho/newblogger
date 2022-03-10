@@ -7,7 +7,6 @@ const MongoStore = require('connect-mongo')
 const passport = require('passport')
 const expressLayouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
-const { dateFormat, select } = require('./helpers/helpers')
 const { ensureAuth } = require('./middleware/auth')
 const app = express()
 
@@ -42,9 +41,13 @@ app.use(session({
 }))
 
 // helper function
+const { dateFormat, select, stripTags, truncate, addButton } = require('./helpers/helpers')
 app.use((req, res, next) => {
   res.locals.dateFormat = dateFormat,
-    res.locals.select = select
+    res.locals.select = select,
+    res.locals.stripTags = stripTags,
+    res.locals.truncate = truncate,
+    res.locals.addButton = addButton
   next()
 })
 

@@ -1,0 +1,28 @@
+<div class="row mt-3">
+  <div class="h3 mb-4 text-info">
+    All Published Stories
+    <%= caption %>
+  </div>
+  <% stories.forEach(story=>{%>
+    <div class="card col-lg-4 col-md-6 col-sm-12 mb-3">
+      <div class="card-header mb-3 position-relative">
+        <img src="<%= story.user.image %>" width="32px" alt="user Image" class="rounded-circle">
+        <small><a href="/stories/user/<%=story.user._id%>"><%= story.user.displayName %></a></small>
+
+        <% if(story.user._id.toString() === user._id.toString()) {%>
+          <%- addButton(story._id) %>
+            <%}%>
+      </div>
+      <div class="card-title">
+        <%= story.title %>
+      </div>
+      <div class="card-body">
+        <%- truncate(stripTags(story.body), 150, `${story._id}`) %>
+
+      </div>
+      <div class="card-footer">
+        <%= dateFormat(story.createdAt, 'MMMM Do YYYY h:mm:ss a') %>
+      </div>
+    </div>
+    <%})%>
+</div>

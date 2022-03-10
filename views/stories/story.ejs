@@ -10,7 +10,9 @@
   <div class="card-title">
     <div class="h6 text-muted">
       Written by:
-      <%= story.user.displayName %>
+      <a href="/stories/user/<%= story.user._id%>">
+        <%= story.user.displayName %>
+      </a>
     </div>
   </div>
   <div class="card-body">

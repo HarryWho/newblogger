@@ -16,18 +16,18 @@
     <tbody>
       <% stories.forEach(story=>{%>
         <tr>
-          <td>
+          <td class="overflow-hidden text-truncate">
             <a href="/stories/show/<%= story._id %>">
               <%= story.title %>
             </a>
           </td>
-          <td>
+          <td class="text-nowrap text-truncate">
             <%= dateFormat(story.createdAt, 'MMMM Do YYYY, h:mm:ss a') %>
           </td>
-          <td>
+          <td class="overflow-hidden">
             <%= story.status %>
           </td>
-          <td>
+          <td style="min-width: 100px;">
             <a href="/stories/edit/<%= story._id%>" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-edit"></i></a>
             <form action="/stories/delete/<%=story._id%>?_method=DELETE" method="post" class="d-inline">
               <button class="btn btn-sm btn-danger rounded-circle"><i class="fa-solid fa-trash-can"></i></button>
