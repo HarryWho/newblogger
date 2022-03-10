@@ -1,12 +1,22 @@
 const express = require('express')
 const router = express.Router()
+const Story = require('../models/Story')
 
-router.get('/', (req, res) => {
-  console.log("Here i am")
+router.get('/', async(req, res) => {
+
   if (!req.user) {
-    res.render('home/login');
+    res.render('home/login', { title: 'Login' });
   } else {
-    res.render('home/dashboard', { user: req.user })
+    try {
+
+      const stories = await Story.find({ user: req.user._id });
+
+
+      res.render('home/dashboard', { user: req.user, stories: stories, title: 'Dashboard' })
+    } catch (error) {
+      console.log(error.message)
+      req.exit(1)
+    }
   }
 })
 

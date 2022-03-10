@@ -1,0 +1,33 @@
+<div class="col-lg-8 mx-auto shadow mt-3 p-4">
+  <div class="h3 text-info text-center shadow-sm p-1">
+    <%= caption %> Your Story
+  </div>
+  <form action="<%= action %>" method="POST">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp" value="<%- typeof story === 'undefined' ? '' : story.title %>">
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-select" id="status" name="status" aria-label="Select Public or Private">
+        
+            <%- select( story.status, '<option value="public">Public</option>\n\t\t\t<option value="private">Private</option>') %> 
+            
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="body" class="form-label">Story</label>
+      <textarea name="body" class="form-control" id="body" rows="3"><%- typeof story === 'undefined' ? '' : story.body %></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary"><%= caption %></button>
+    <a href="/" class="btn btn-info">Cancel</a>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.17.2/ckeditor.js" integrity="sha512-QuHtmTNLFyCbmk2jGlr0URK0XiNn1G0nHYMaNfbOLQgXBiO6RllC+xFkPO5YnG6zYnRVUj6b5uSXwmJeJgOLBw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/33.0.0/ckeditor.min.js" integrity="sha512-g6eyGPP3W3xYpAl3aYE9TRbXQgqCJk91spkW3l1llFNyYJesiRZ7knoH0gBLXpfK6wuty11rVT2290X6i5JS6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script>
+  window.onload = function() {
+    CKEDITOR.replace('body')
+  }
+</script>

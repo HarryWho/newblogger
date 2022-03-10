@@ -1,0 +1,19 @@
+<div class="card p-3">
+  <div class="card-header">
+    <div class="h3 text-primary">
+      <%= story.title%>
+        <% if(story.user._id.toString() == user._id.toString()){%>
+          <a href="/stories/edit/<%=story._id%>" class="btn btn-sm border shadow-lg position-absolute end-0 mx-4 rounded-circle"><i class="fa fa-edit"></i></a>
+          <%}%>
+    </div>
+  </div>
+  <div class="card-title">
+    <div class="h6 text-muted">
+      Written by:
+      <%= story.user.displayName %>
+    </div>
+  </div>
+  <div class="card-body">
+    <%- story.body %>
+  </div>
+</div>

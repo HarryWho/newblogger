@@ -1,11 +1,13 @@
-const GoogleStrategy = require('passport-google-oauth20').Strategy
-
+const GoogleStrategy = require('passport-google-oauth2').Strategy
+const config = require('dotenv')
 const mongoose = require('mongoose')
 const User = require('../models/User')
   // const passport = require('passport')
+config.config({ path: './config/settings.env' })
 
 module.exports = {
   myGooglePassport: function(passport) {
+
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -13,7 +15,7 @@ module.exports = {
 
       },
       async(accessToken, refreshToken, profile, done) => {
-
+        console.log(profile)
         const newUser = {
           googleId: profile.id,
           displayName: profile.displayName,
