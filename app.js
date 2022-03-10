@@ -7,7 +7,7 @@ const MongoStore = require('connect-mongo')
 const passport = require('passport')
 const expressLayouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
-const { ensureAuth } = require('./middleware/auth')
+const { ensureAuth, ensureGuest } = require('./middleware/auth')
 const app = express()
 
 const { myGooglePassport } = require('./config/passport')
@@ -61,9 +61,11 @@ app.use(methodOverride('_method'))
 const homeRoutes = require('./routes/index')
 const authRoutes = require('./routes/auth')
 const storiesRoutes = require('./routes/stories')
+const commentRoutes = require('./routes/comment')
 app.use('/', homeRoutes)
-app.use('/auth', authRoutes)
+app.use('/auth', ensureGuest, authRoutes)
 app.use('/stories', ensureAuth, storiesRoutes)
+app.use('/comment', ensureAuth, commentRoutes)
 
 
 // Connect to Mongo

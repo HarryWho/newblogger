@@ -18,4 +18,75 @@
   <div class="card-body">
     <%- story.body %>
   </div>
+  <div class="card footer">
+
+    <div class="text-muted"> Comments:
+      <% if(typeof comments!='undefined'){%>
+        <%= comments.length %>
+          <%}else{%>
+            0
+            <%}%>
+              <div class="d-inline position-absolute end-0">
+                <button class="btn btn-sm" id="addcomment">Leave a comment</button>
+              </div>
+
+    </div>
+  </div>
+  <div class="card">
+    <div class="commentarea d-none">
+      <input class="form-control" type="text" name="comment" id="comment" placeholder="Leave Comment">
+    </div>
+
+    <% if(typeof comments!='undefined' && comments.length>0){%>
+      <div class="card-body" id="commentSection">
+        <% comments.forEach(comment=>{ %>
+          <div class="card-body">
+            <div>
+              <img src="<%- comment.user.image %>" width="20px" class="rounded-circle" alt="User Image">
+              <%= comment.user.displayName %>
+                <small class="text-muted"> - <%- dateFormat(comment.date,'MMM Do YYYY')%></small>
+            </div>
+            <div class="bg-light p-3 mx-5">
+              <%= comment.comment %>
+            </div>
+          </div>
+          <%})%>
+      </div>
+
+      <%}%>
+  </div>
 </div>
+
+<script>
+  const form = document.getElementById('form')
+  const commentBtn = document.getElementById('addcomment')
+  const displayarea = document.querySelector('.commentarea')
+  const Mycomment = document.getElementById('comment')
+
+  commentBtn.addEventListener('click', () => {
+
+    displayarea.classList.remove('d-none');
+  })
+  Mycomment.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13) {
+      // Create an XMLHttpRequest object
+      const xhttp = new XMLHttpRequest();
+
+      let formData = `comment=${Mycomment.value}&user=<%=user._id%>&story=<%=story._id%>`
+        // Define a callback functiondsfdf
+      xhttp.onload = function() {
+        // Here you can use the Data
+        Mycomment.value = ''
+        displayarea.classList.add('d-none')
+        document.location = xhttp.response
+
+      }
+
+      // Send a request
+      xhttp.open("POST", "http://localhost:3000/comment", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send(formData);
+
+    }
+  })
+</script>

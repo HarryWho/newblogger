@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const Story = require('../models/Story')
+const Comment = require('../models/Comment')
   // @desc get the add story form
   // GET /stories/add
 router.get('/', (req, res) => {
@@ -73,10 +74,13 @@ router.get('/show/:storyId', async(req, res) => {
   try {
     const story = await Story.findById(req.params.storyId)
       .populate('user').lean();
+    const comments = await Comment.find({ story: story._id })
+      .populate('user').sort({ date: 'desc' });
 
     res.render('stories/story', {
       user: req.user,
       story: story,
+      comments: comments,
       title: 'Story'
     });
   } catch (err) {
