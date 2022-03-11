@@ -1,0 +1,42 @@
+<% if(success_msg != ""){ %>
+  <div class="toast position-absolute fade show align-items-center text-white bg-success border-0 top-50 start-50 translate-middle" data-bs-autohide='true' data-bs-delay='3' role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<%= user.image %>" class="rounded-circle me-2" width="25px" alt="...">
+      <div class="me-auto h4">
+        <%=user.displayName %>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      <!-- <div class="d-flex"> -->
+    </div>
+    <div class="toast-body">
+      <%= success_msg %>
+    </div>
+
+  </div>
+  <!-- <script>
+    window.onload = function() {
+      toast.show()
+    }
+  </script> -->
+  <% } %>
+    <% if(error_msg != ""){ %>
+      <div class="toast position-absolute fade show align-items-center text-white bg-warning border-0 top-50 start-50 translate-middle" data-bs-autohide='true' data-bs-delay='3' role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="<%= user.image %>" class="rounded-circle me-2" width="25px" alt="...">
+          <div class="me-auto h4">
+            <%=user.displayName %>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          <!-- <div class="d-flex"> -->
+        </div>
+        <div class="toast-body">
+          <%= error_msg %>
+        </div>
+
+      </div>
+      <!-- <script>
+            window.onload = function() {
+              toast.show()
+            }
+          </script> -->
+      <% } %>

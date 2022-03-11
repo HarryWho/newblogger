@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/HarryWho/newblogger#readme",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",

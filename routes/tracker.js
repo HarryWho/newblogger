@@ -32,7 +32,7 @@ router.post('/', async(req, res) => {
       record: req.body.record
     };
     const tracker = new Tracker(myTaracker)
-    tracker.save()
+    await tracker.save()
     res.redirect('/tracker')
 
   } catch (error) {

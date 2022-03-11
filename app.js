@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongo')
 const passport = require('passport')
 const expressLayouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
+const flash = require('connect-flash')
 const { ensureAuth, ensureGuest } = require('./middleware/auth')
 const app = express()
 
@@ -41,9 +42,12 @@ app.use(session({
   }),
   resave: false,
   saveUninitialized: true
+
 }))
 
+
 // helper function
+app.use(flash())
 const { dateFormat, select, stripTags, truncate, addButton } = require('./helpers/helpers')
 app.use((req, res, next) => {
   res.locals.dateFormat = dateFormat,
@@ -51,6 +55,8 @@ app.use((req, res, next) => {
     res.locals.stripTags = stripTags,
     res.locals.truncate = truncate,
     res.locals.addButton = addButton
+  res.locals.error_msg = req.flash('error')
+  res.locals.success_msg = req.flash('success')
   next()
 })
 

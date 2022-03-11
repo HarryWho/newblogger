@@ -1,7 +1,7 @@
 <div class="h3 text-info">
   <%= user.firstName%> Dashboard
 </div>
-<!-- <div class="h5 text-info"></div> -->
+<!-- Tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
@@ -16,12 +16,14 @@
     <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
   </li>
 </ul>
+
+<!-- Tab Content  -->
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     Home
   </div>
   <div class="tab-pane fade" id="stories" role="tabpanel" aria-labelledby="stories-tab">
-    <%- include('../partials/_dashstories.ejs') %>
+    <%- include('./dashstories.ejs') %>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
