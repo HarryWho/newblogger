@@ -1,0 +1,46 @@
+<div class="row text-center text-info mt-2">
+  <h3>Expence Tracker</h3>
+</div>
+<div class="row mt-2">
+  <div class="col-lg-3">
+    <%- include('../partials/_tracker_form.ejs')%>
+  </div>
+  <div class="col-lg-9">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Debit</th>
+          <th scope="col">Credit</th>
+          <th scope="col">Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (tracker.length>0){%>
+          <% tracker.forEach(track=>{%>
+            <tr>
+              <td scope="row">
+                <%= dateFormat(track.date, 'DD/MM/YYYY') %>
+              </td>
+              <td>
+                <%= track.description%>
+              </td>
+              <td class="text-danger">
+                -
+                <%= track.debit >0 ? track.debit : '' %>
+              </td>
+              <td class="text-success">
+                <%= track.credit > 0 ? track.credit : '' %>
+              </td>
+              <td>
+                <%= track.balance %>
+              </td>
+            </tr>
+            <%})%>
+              <%}%>
+
+      </tbody>
+    </table>
+  </div>
+</div>

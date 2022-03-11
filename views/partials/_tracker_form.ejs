@@ -1,0 +1,81 @@
+<div class="col">
+  <form action="/tracker" method="POST" id="myexpencetrackerform">
+    <label class="text-center text-info mb-3">Expense Tracker Form</label>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control form-control-sm" id="balance" name="balance" aria-label="Balance" aria-describedby="Balance" value="<%= tracker[0].balance %>" readonly>
+      <input type="hidden" name="record" value="<%=tracker.length+1%>">
+    </div>
+    <div id="amount-err" class="text-danger"></div>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="amounts"><i class="fa fa-usd" aria-hidden="true"></i></span>
+      <input type="text" class="form-control form-control-sm" id="amount" name="amount" placeholder="Amount" aria-label="Amount" aria-describedby="amount">
+    </div>
+    <div id="desc-err" class="text-danger"></div>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="descs"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+      <input type="text" class="form-control form-control-sm" id="desc" name="desc" placeholder="Description" aria-label="Amount" aria-describedby="amount">
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="dates"></span>
+      <input type="date" class="form-control form-control-sm" id="date" name="date" aria-label="Amount" aria-describedby="amount">
+    </div>
+    <div id="credded-err" class="text-danger"></div>
+    <div class="input-group mb-3">
+      <select class="form-select form-control form-control-sm" id="creddeb" aria-label="Credit Debit Choice" name="creddeb">
+          <option value="c" selected>Choose Credit / Debit</option>
+          <option value="credit">Credit</option>
+          <option value="debit">Debit</option>
+        </select>
+      <!-- <span class="input-group-text" id="creddebs"><i class="fa fa-chevron-down" aria-hidden="true"></i></span> -->
+    </div>
+  </form>
+</div>
+<div class="col-auto">
+  <button type="button" id="submitBtn" class="btn btn-success mb-3 d-block">Add To Tracker</button>
+</div>
+
+<script>
+  const submitBtn = document.getElementById('submitBtn')
+  const amount = document.getElementById('amount')
+  const creddeb = document.getElementById('creddeb')
+  const amounterr = document.getElementById('amount-err')
+  const creddeberr = document.getElementById('credded-err')
+  const descerr = document.getElementById('desc-err')
+  const desc = document.getElementById('desc')
+  const date = document.getElementById('date')
+  const form = document.getElementById('myexpencetrackerform')
+
+  creddeb.addEventListener('change', () => {
+    creddeberr.innerHTML = ''
+  })
+  desc.addEventListener('keypress', () => {
+    descerr.innerHTML = ''
+  })
+  amount.addEventListener('keypress', (e) => {
+
+    if (e.keyCode > 47 && e.keyCode < 58 || e.keyCode == 46) {
+      amounterr.innerHTML = ''
+    } else {
+
+      amounterr.innerHTML = 'Only numbers and . allowed'
+      e.preventDefault()
+      exit()
+    }
+  })
+  submitBtn.addEventListener('click', () => {
+
+    if (amount.value == "") {
+      amounterr.innerHTML = 'Please enter amount';
+      exit()
+    }
+    if (desc.value == "") {
+      descerr.innerHTML = "Please enter a description"
+      exit()
+    }
+    if (creddeb.value === "c") {
+      creddeberr.innerHTML = 'Please Choose either Credit or Debit';
+      exit()
+    }
+    form.submit()
+  })
+</script>

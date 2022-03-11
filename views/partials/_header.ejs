@@ -12,40 +12,47 @@
               <span class="visually-hidden">(current)</span>
             </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/stories/public">Public Stories</a>
-        </li>
         <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
+          <a class="nav-link active" href="/stories/public">Public Stories</a>
+        </li> -->
+        <% if(typeof user!="undefined"){%>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Apps</a>
+            <div class="dropdown-menu">
+              <a href="/tracker" class="dropdown-item">Expence Tracker</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/stories/public">Public Stories</a>
+            </div>
+          </li>
+          <%}%>
+            <!-- <li class="nav-item">
           <a class="nav-link" href="#">About</a>
         </li> -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">User</a>
-          <div class="dropdown-menu">
-            <% if(typeof user=="undefined"){%>
-              <a class="dropdown-item" href="/">Login</a>
-              <%}else{%>
-                <div class="card text-center width-100">
-                  <div class="card-header">
-                    <%= user.displayName%>
-                  </div>
-                  <div class="card-body">
-                    <img src="<%= user.image%>" alt="User Image" class="rounded-circle">
-                  </div>
-                  <div class="card-footer">
-                    <a href="/auth/logout" class="btn btn-primary d-block">Logout</a>
-                  </div>
-                </div>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">User</a>
+              <div class="dropdown-menu">
+                <% if(typeof user=="undefined"){%>
+                  <a class="dropdown-item" href="/">Login</a>
+                  <%}else{%>
+                    <div class="card text-center width-100">
+                      <div class="card-header">
+                        <%= user.displayName%>
+                      </div>
+                      <div class="card-body">
+                        <img src="<%= user.image%>" alt="User Image" class="rounded-circle">
+                      </div>
+                      <div class="card-footer">
+                        <a href="/auth/logout" class="btn btn-primary d-block">Logout</a>
+                      </div>
+                    </div>
 
-                <%}%>
-                  <!-- <a class="dropdown-item" href="#">Another action</a>
+                    <%}%>
+                      <!-- <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Separated link</a> -->
-          </div>
-        </li>
+              </div>
+            </li>
       </ul>
       <form class="d-flex">
         <input class="form-control me-sm-2" type="text" placeholder="Search" spellcheck="false" data-ms-editor="true">

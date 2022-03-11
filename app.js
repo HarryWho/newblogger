@@ -65,10 +65,12 @@ const homeRoutes = require('./routes/index')
 const authRoutes = require('./routes/auth')
 const storiesRoutes = require('./routes/stories')
 const commentRoutes = require('./routes/comment')
+const trackRoutes = require('./routes/tracker')
 app.use('/', homeRoutes)
 app.use('/auth', authRoutes)
 app.use('/stories', ensureAuth, storiesRoutes)
 app.use('/comment', ensureAuth, commentRoutes)
+app.use('/tracker', ensureAuth, trackRoutes)
 
 
 // Connect to Mongo
