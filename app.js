@@ -1,5 +1,7 @@
 const config = require('dotenv')
 const express = require('express')
+const path = require('path')
+const partials = require('express-partials')
 const ConnectDB = require('./config/DB')
 const session = require('express-session')
 const mongoose = require('mongoose')
@@ -15,14 +17,15 @@ myGooglePassport(passport)
   // // get config settings
 config.config({ path: './config/settings.env' })
 
+
 // static path
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, '/public')))
 
 // body parser
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+  // ejs setup
 
-// ejs setup
 app.set('view engine', 'ejs')
 app.set('layout', 'layouts/layout')
 app.set("layout extractStyles", true)
@@ -63,7 +66,7 @@ const authRoutes = require('./routes/auth')
 const storiesRoutes = require('./routes/stories')
 const commentRoutes = require('./routes/comment')
 app.use('/', homeRoutes)
-app.use('/auth', ensureGuest, authRoutes)
+app.use('/auth', authRoutes)
 app.use('/stories', ensureAuth, storiesRoutes)
 app.use('/comment', ensureAuth, commentRoutes)
 

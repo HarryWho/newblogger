@@ -1,0 +1,42 @@
+<% if(typeof stories!=='undefined') {%>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% stories.forEach(story=>{%>
+        <tr>
+          <td class="overflow-hidden text-truncate">
+            <a href="/stories/show/<%= story._id %>">
+              <%= story.title %>
+            </a>
+          </td>
+          <td class="text-nowrap text-truncate">
+            <%= dateFormat(story.createdAt, 'MMMM Do YYYY, h:mm:ss a') %>
+          </td>
+          <td class="overflow-hidden">
+            <%= story.status %>
+          </td>
+          <td style="min-width: 100px;">
+            <a href="/stories/edit/<%= story._id%>" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-edit"></i></a>
+            <form action="/stories/delete/<%=story._id%>?_method=DELETE" method="post" class="d-inline">
+              <button class="btn btn-sm btn-danger rounded-circle"><i class="fa-solid fa-trash-can"></i></button>
+            </form>
+          </td>
+        </tr>
+        <%})%>
+    </tbody>
+  </table>
+  <%}else{%>
+    <p>you have no stories</p>
+    <%}%>
+      <!-- <a href="/stories" class="position-absolute top-50 start-50 btn btn-success rounded-circle"><i class="fa fa-plus"></i></a> -->
+      <%- include('../partials/_btn_add') %>
+        <script>
+          const form = document.getElementsByTagName('form')
+        </script>

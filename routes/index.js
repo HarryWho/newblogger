@@ -10,9 +10,12 @@ router.get('/', async(req, res) => {
     try {
 
       const stories = await Story.find({ user: req.user._id });
+      res.render('home/dashboard.ejs', {
+        user: req.user,
+        stories: stories,
+        title: 'Dashboard'
 
-
-      res.render('home/dashboard', { user: req.user, stories: stories, title: 'Dashboard' })
+      })
     } catch (error) {
       console.log(error.message)
       req.exit(1)

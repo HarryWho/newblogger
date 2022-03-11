@@ -2,46 +2,22 @@
   <%= user.firstName%>
 </div>
 <div class="h5 text-info">Dashboard</div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Stories</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <%- include('../partials/_dashstories.ejs') %>
 
-<% if(typeof stories!=='undefined') {%>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Date</th>
-        <th scope="col">Status</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% stories.forEach(story=>{%>
-        <tr>
-          <td class="overflow-hidden text-truncate">
-            <a href="/stories/show/<%= story._id %>">
-              <%= story.title %>
-            </a>
-          </td>
-          <td class="text-nowrap text-truncate">
-            <%= dateFormat(story.createdAt, 'MMMM Do YYYY, h:mm:ss a') %>
-          </td>
-          <td class="overflow-hidden">
-            <%= story.status %>
-          </td>
-          <td style="min-width: 100px;">
-            <a href="/stories/edit/<%= story._id%>" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-edit"></i></a>
-            <form action="/stories/delete/<%=story._id%>?_method=DELETE" method="post" class="d-inline">
-              <button class="btn btn-sm btn-danger rounded-circle"><i class="fa-solid fa-trash-can"></i></button>
-            </form>
-          </td>
-        </tr>
-        <%})%>
-    </tbody>
-  </table>
-  <%}else{%>
-    <p>you have no stories</p>
-    <%}%>
-      <!-- <a href="/stories" class="position-absolute top-50 start-50 btn btn-success rounded-circle"><i class="fa fa-plus"></i></a> -->
-      <%- include('../partials/_btn_add.ejs') %>
-        <script>
-          const form = document.getElementsByTagName('form')
-        </script>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div>
