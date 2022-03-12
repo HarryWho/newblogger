@@ -4,27 +4,50 @@
 <!-- Tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+    <button class="nav-link button-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <button class="nav-link button-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="stories-tab" data-bs-toggle="tab" data-bs-target="#stories" type="button" role="tab" aria-controls="stories" aria-selected="true">Stories</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+    <button class="nav-link button-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
   </li>
 </ul>
 
 <!-- Tab Content  -->
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    Home
+  <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <%- include('./home.ejs') %>
   </div>
-  <div class="tab-pane fade" id="stories" role="tabpanel" aria-labelledby="stories-tab">
-    <%- include('./dashstories.ejs') %>
+
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <%- include('./profile.ejs')%>
   </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
 </div>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+  window.onload = function() {
+    let activeFrag = location.hash.replace('#', '');
+
+    if (activeFrag === '') {
+      activeFrag = 'home'
+
+    }
+    document.getElementById(activeFrag).classList.add("show", "active")
+    document.getElementById(activeFrag + '-tab').classList.add('active');
+
+    const myPanes = document.querySelectorAll('.button-link')
+
+    myPanes.forEach((pane) => {
+      pane.addEventListener('click', function(e) {
+        let url = location.href.substring(0, location.href.lastIndexOf('#'))
+        let fragment = e.target.getAttribute('data-bs-target')
+
+        location.href = url + fragment
+      });
+      // alert(pane.id)
+    });
+  }
+</script>

@@ -34,8 +34,8 @@
                 <% if(typeof user=="undefined"){%>
                   <a class="dropdown-item" href="/">Login</a>
                   <%}else{%>
-                    <div class="card text-center width-100">
-                      <div class="card-header">
+                    <div class="card text-center">
+                      <div class="card-header dropdown-item">
                         <%= user.displayName%>
                       </div>
                       <div class="card-body">
@@ -57,6 +57,11 @@
       <form class="d-flex">
         <input class="form-control me-sm-2" type="text" placeholder="Search" spellcheck="false" data-ms-editor="true">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+
+        <a href="#" class="sidebar-toggle text-white mx-3 pt-1" data-toggle="control-sidebar" role="button">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="fa fa-cogs" aria-hidden="true"></i>
+        </a>
       </form>
     </div>
   </div>

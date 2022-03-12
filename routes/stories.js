@@ -124,7 +124,7 @@ router.post('/', async(req, res) => {
     res.redirect('/')
   } catch (err) {
     console.log(err)
-    res.redirect('/')
+    res.render('error/500', { user: req.user })
   }
 })
 module.exports = router;
