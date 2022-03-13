@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const TrackerSchema = mongoose.Schema({
+const TrackerSchema = new mongoose.Schema({
   balance: {
     type: Number,
     get: v => (v / 100).toFixed(2),

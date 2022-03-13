@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/HarryWho/newblogger#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.0",
@@ -29,6 +30,7 @@
     "moment": "^2.29.1",
     "mongoose": "^6.2.4",
     "passport": "^0.5.2",
-    "passport-google-oauth2": "^0.2.0"
+    "passport-google-oauth2": "^0.2.0",
+    "passport-local": "^1.0.0"
   }
 }

@@ -48,15 +48,16 @@ app.use(session({
 
 // helper function
 app.use(flash())
-const { dateFormat, select, stripTags, truncate, addButton } = require('./helpers/helpers')
+const { dateFormat, select, stripTags, truncate, addButton, randomColor } = require('./helpers/helpers')
 app.use((req, res, next) => {
   res.locals.dateFormat = dateFormat,
     res.locals.select = select,
     res.locals.stripTags = stripTags,
     res.locals.truncate = truncate,
-    res.locals.addButton = addButton
-  res.locals.error_msg = req.flash('error')
-  res.locals.success_msg = req.flash('success')
+    res.locals.addButton = addButton,
+    res.locals.randomColor = randomColor,
+    res.locals.error_msg = req.flash('error'),
+    res.locals.success_msg = req.flash('success')
   next()
 })
 
@@ -72,16 +73,18 @@ const authRoutes = require('./routes/auth')
 const storiesRoutes = require('./routes/stories')
 const commentRoutes = require('./routes/comment')
 const trackRoutes = require('./routes/tracker')
+const profileRoutes = require('./routes/profile')
 app.use('/', homeRoutes)
 app.use('/auth', authRoutes)
 app.use('/stories', ensureAuth, storiesRoutes)
 app.use('/comment', ensureAuth, commentRoutes)
 app.use('/tracker', ensureAuth, trackRoutes)
-
+app.use('/profile', ensureAuth, profileRoutes)
 
 // Connect to Mongo
 ConnectDB()
 
+// start express server
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
 })

@@ -5,7 +5,12 @@ const UserSchema = new mongoose.Schema({
   displayName: String,
   firstName: String,
   lastName: String,
-  image: String
+  image: {
+    type: String,
+    default: '/img/user.webp'
+  },
+  password: String,
+  salt: String
 });
 
 module.exports = mongoose.model('User', UserSchema);

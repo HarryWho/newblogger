@@ -14,6 +14,11 @@ module.exports = {
     } else {
       return next()
     }
+  },
+
+  validateRegisterForm: function(req, res, next) {
+
+
   }
 
 }

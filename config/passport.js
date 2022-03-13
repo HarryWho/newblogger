@@ -2,6 +2,7 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy
 const config = require('dotenv')
 const mongoose = require('mongoose')
 const User = require('../models/User')
+const Profile = require('../models/Profile')
   // const passport = require('passport')
 config.config({ path: './config/settings.env' })
 
@@ -21,10 +22,12 @@ module.exports = {
           displayName: profile.displayName,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
-          image: profile.photos[0].value
+          image: profile.photos[0].value,
+
         }
         try {
           let user = await User.findOne({ googleId: profile.id })
+
           if (user) {
             done(null, user)
           } else {

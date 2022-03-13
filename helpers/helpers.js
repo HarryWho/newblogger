@@ -1,5 +1,6 @@
 const moment = require('moment')
 
+const colors = ['danger', 'warning', 'primary', 'secondary', 'info', 'dark']
 module.exports = {
   dateFormat: function(date, format) {
     return moment(date).format(format)
@@ -27,5 +28,11 @@ module.exports = {
   },
   addButton: function(storyId) {
     return "<a href='/stories/edit/" + storyId + "' class='btn btn-primary btn-sm rounded-circle position-absolute top-0 end-0 translate-middle'><i class='fa fa-edit'></i></a>"
+  },
+  randomColor: function(path) {
+    let rndNum = Math.floor(
+      Math.random() * (5 - 0)
+    )
+    return path + '-' + colors[rndNum]
   }
 }
