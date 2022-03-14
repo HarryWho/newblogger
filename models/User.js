@@ -9,8 +9,12 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: '/img/user.webp'
   },
-  password: String,
-  salt: String
+  email: String,
+  joined: {
+    type: Date,
+    default: Date.now
+  },
+  password: String
 });
 
 module.exports = mongoose.model('User', UserSchema);

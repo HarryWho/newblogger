@@ -1,21 +1,23 @@
 const config = require('dotenv')
 const express = require('express')
 const path = require('path')
-const partials = require('express-partials')
+  // const partials = require('express-partials')
 const ConnectDB = require('./config/DB')
 const session = require('express-session')
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')
-const passport = require('passport')
+const gpassport = require('passport')
+const lpassport = require('passport')
 const expressLayouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const { ensureAuth, ensureGuest } = require('./middleware/auth')
 const app = express()
 
-const { myGooglePassport } = require('./config/passport')
-myGooglePassport(passport)
-  // // get config settings
+
+
+
+// // get config settings
 config.config({ path: './config/settings.env' })
 
 
@@ -56,15 +58,17 @@ app.use((req, res, next) => {
     res.locals.truncate = truncate,
     res.locals.addButton = addButton,
     res.locals.randomColor = randomColor,
-    res.locals.error_msg = req.flash('error'),
-    res.locals.success_msg = req.flash('success')
+    res.locals.error_msg = req.flash('error_msg'),
+    res.locals.success_msg = req.flash('success_msg')
+  res.locals.error = req.flash('error')
   next()
 })
 
 // Passport Middleware
-app.use(passport.initialize())
-app.use(passport.session())
-
+app.use(gpassport.initialize())
+app.use(gpassport.session())
+app.use(lpassport.initialize())
+app.use(lpassport.session())
 app.use(methodOverride('_method'))
 
 //Routes

@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const User = require('../models/User')
 const Story = require('../models/Story')
 const Profile = require('../models/Profile')
+const { validateRegisterForm } = require('../middleware/auth')
+const bcrypt = require('bcryptjs')
+
 router.get('/', async(req, res) => {
 
   if (!req.user) {
@@ -33,7 +37,32 @@ router.get('/register', (req, res) => {
   res.render('home/register', { user: req.user, title: 'Register User' })
 })
 
-router.post('/register', async(req, res) => {
+router.post('/register', validateRegisterForm, async(req, res) => {
+  const user = await User.findOne({ email: req.body.email })
+  if (user) {
+    let errors = []
+    errors.push({ msg: "Email is already registered" })
+    res.render('home/register', { title: "Register User", errors: errors, fields: req.body })
+  } else {
+    try {
+      const newUser = new User({
+          displayName: req.body.displayName,
+          email: req.body.email,
+          password: req.body.password
+        })
+        /// hash pawword
+      const salt = await bcrypt.genSalt()
+      const hashPassword = await bcrypt.hash(req.body.password, salt)
+      newUser.password = hashPassword
+      newUser.save();
+      req.flash('success_msg', "Successfully registered!.. You may now login")
+      res.redirect('/')
+    } catch (error) {
+      console.log(error.message)
+      res.status(500).render('error/500', { title: "Error", error: error.message })
+    }
+
+  }
 
 })
 
