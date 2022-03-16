@@ -52,14 +52,14 @@ app.use(session({
 app.use(flash())
 const { dateFormat, select, stripTags, truncate, addButton, randomColor } = require('./helpers/helpers')
 app.use((req, res, next) => {
-  res.locals.dateFormat = dateFormat,
-    res.locals.select = select,
-    res.locals.stripTags = stripTags,
-    res.locals.truncate = truncate,
-    res.locals.addButton = addButton,
-    res.locals.randomColor = randomColor,
-    res.locals.error_msg = req.flash('error_msg'),
-    res.locals.success_msg = req.flash('success_msg')
+  res.locals.dateFormat = dateFormat
+  res.locals.select = select
+  res.locals.stripTags = stripTags
+  res.locals.truncate = truncate
+  res.locals.addButton = addButton
+  res.locals.randomColor = randomColor
+  res.locals.error_msg = req.flash('error_msg')
+  res.locals.success_msg = req.flash('success_msg')
   res.locals.error = req.flash('error')
   next()
 })
